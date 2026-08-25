@@ -1,0 +1,7 @@
+.clings-build/
+.clings-progress.json
+__pycache__/
+*.o
+*.clings-tmp.c
+.*.clings-tmp.c
+a.out

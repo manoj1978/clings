@@ -1,0 +1,225 @@
+{
+  "exercises": [
+    {
+      "name": "intro1",
+      "path": "exercises/00_intro/intro1.c",
+      "passing": true,
+      "hint": "This one is already correct. Delete the `// I AM NOT DONE` comment at the top of the file, save, and clings will move on."
+    },
+    {
+      "name": "intro2",
+      "path": "exercises/00_intro/intro2.c",
+      "hint": "C23 sets `__STDC_VERSION__` to `202311L`. Compile with `-std=c23` (clings already does). Fill in that number so the static_assert holds."
+    },
+    {
+      "name": "bool1",
+      "path": "exercises/01_bool/bool1.c",
+      "hint": "C23 makes `bool`, `true`, and `false` keywords. You no longer need `<stdbool.h>` macros or `_Bool`. Write `bool ready = true;`."
+    },
+    {
+      "name": "bool2",
+      "path": "exercises/01_bool/bool2.c",
+      "hint": "Give `is_even` the return type `bool` and return `true` or `false`. `_Generic(true, bool: 1, default: 0)` is 1 in C23 — `true` is not an `int`."
+    },
+    {
+      "name": "nullptr1",
+      "path": "exercises/02_nullptr/nullptr1.c",
+      "hint": "The C23 null pointer constant is the keyword `nullptr`. It is not `NULL`, not `0`, and not `(void *)0`. Assign `p = nullptr;`."
+    },
+    {
+      "name": "nullptr2",
+      "path": "exercises/02_nullptr/nullptr2.c",
+      "hint": "`nullptr` has type `nullptr_t`, from `<stddef.h>`. Declare `nullptr_t np = nullptr;` and then assign that to any pointer type."
+    },
+    {
+      "name": "nullptr3",
+      "path": "exercises/02_nullptr/nullptr3.c",
+      "hint": "`_Generic(nullptr, nullptr_t: 1, default: 0)` is 1. `_Generic(NULL, ...)` typically matches `void *` instead. Use `nullptr` in the `_Generic` selector."
+    },
+    {
+      "name": "literals1",
+      "path": "exercises/03_literals/literals1.c",
+      "hint": "Binary integer literals use the `0b` or `0B` prefix: `0b1010` is 10, `0b1111'0000` is 240. Replace the placeholder with a binary literal equal to 42."
+    },
+    {
+      "name": "literals2",
+      "path": "exercises/03_literals/literals2.c",
+      "hint": "C23 lets you put `'` between digits: `1'000'000`, `0xFF'FF`, `0b1010'0001`. The apostrophe is not a character and does not change the value."
+    },
+    {
+      "name": "literals3",
+      "path": "exercises/03_literals/literals3.c",
+      "hint": "Write the permission bits as binary literals. `READ` is `0b100`, `WRITE` is `0b010`, `EXEC` is `0b001`. Then `READ | WRITE` is `0b110`."
+    },
+    {
+      "name": "auto1",
+      "path": "exercises/04_auto/auto1.c",
+      "hint": "`auto` in C23 infers the type from the initializer: `auto n = 42;` is an `int`. Replace `???` with `auto`."
+    },
+    {
+      "name": "auto2",
+      "path": "exercises/04_auto/auto2.c",
+      "hint": "`auto` without an initializer is invalid. Write `auto n = 42;` — inference needs a value to look at."
+    },
+    {
+      "name": "typeof1",
+      "path": "exercises/05_typeof/typeof1.c",
+      "hint": "`typeof(expr)` is the type of that expression. `typeof(seed) copy = seed;` makes `copy` the same type as `seed` (here, `double`)."
+    },
+    {
+      "name": "typeof2",
+      "path": "exercises/05_typeof/typeof2.c",
+      "hint": "`typeof` keeps qualifiers; `typeof_unqual` strips `const`/`volatile`/`restrict`/`_Atomic`. Use `typeof_unqual(name)` so the copy is a plain `char[8]` you can write to. Actually it is an array type — use a pointer: `typeof_unqual(*name)` is `char`."
+    },
+    {
+      "name": "typeof3",
+      "path": "exercises/05_typeof/typeof3.c",
+      "hint": "A type-generic swap: `#define SWAP(a, b) do { typeof(a) tmp = (a); (a) = (b); (b) = tmp; } while (0)`. `typeof(a)` gives you a temporary of the right type without naming it."
+    },
+    {
+      "name": "constexpr1",
+      "path": "exercises/06_constexpr/constexpr1.c",
+      "hint": "`constexpr int n = 4;` is an integer constant expression. You can use `n` as an array length and in `static_assert`. Replace `const` with `constexpr`."
+    },
+    {
+      "name": "constexpr2",
+      "path": "exercises/06_constexpr/constexpr2.c",
+      "hint": "In C, `const int n = 4;` is *not* an integer constant expression, so `static_assert(n == 4)` is illegal and `int a[n]` is a VLA. `constexpr` is the keyword that actually produces a compile-time constant. Change `const` to `constexpr`."
+    },
+    {
+      "name": "attr1",
+      "path": "exercises/07_attributes/attr1.c",
+      "cflags": ["-Werror=unused-result"],
+      "hint": "`[[nodiscard]]` makes it a warning (an error here) to ignore the return value. Store it: `int code = must_check();` and use `code`."
+    },
+    {
+      "name": "attr2",
+      "path": "exercises/07_attributes/attr2.c",
+      "cflags": ["-Werror=unused-variable", "-Werror=unused-parameter"],
+      "hint": "Mark things you intentionally do not use with `[[maybe_unused]]`. You can put it on the variable: `[[maybe_unused]] int scratch = 0;` and on a parameter."
+    },
+    {
+      "name": "attr3",
+      "path": "exercises/07_attributes/attr3.c",
+      "cflags": ["-Werror=implicit-fallthrough"],
+      "hint": "A `case` that falls into the next one needs `[[fallthrough]];` as a statement at the end of the case, just before the next `case` label."
+    },
+    {
+      "name": "attr4",
+      "path": "exercises/07_attributes/attr4.c",
+      "cflags": ["-Werror=deprecated-declarations"],
+      "hint": "`old_api` is `[[deprecated]]`. Call `new_api` instead. The deprecation message on the old function tells you what to use."
+    },
+    {
+      "name": "init1",
+      "path": "exercises/08_init/init1.c",
+      "hint": "C23 allows empty initializers: `T x = {};` zeroes `x`, including scalars, structs, and arrays. Replace the bogus initializer with `{}`."
+    },
+    {
+      "name": "func1",
+      "path": "exercises/09_functions/func1.c",
+      "cflags": ["-Werror=unused-parameter"],
+      "hint": "C23 lets you omit a parameter name you do not use: `int callback(void *ctx, int /* unused */) {` can be `int callback(void *ctx, int) {`. Drop the dummy name."
+    },
+    {
+      "name": "func2",
+      "path": "exercises/09_functions/func2.c",
+      "hint": "C23 allows a variadic function with no named parameters: `int first(...)`. Then `va_start(ap)` takes only the `va_list` — there is no last named argument to pass."
+    },
+    {
+      "name": "enum1",
+      "path": "exercises/10_enums/enum1.c",
+      "hint": "C23 enums may fix their underlying type: `enum color : unsigned char { Red, Green, Blue };`. Add `: uint8_t` (from `<stdint.h>`) so `sizeof` is 1."
+    },
+    {
+      "name": "enum2",
+      "path": "exercises/10_enums/enum2.c",
+      "hint": "Without a fixed type, enumerators had to fit in `int`. Give the enum an underlying type wide enough, e.g. `enum : unsigned long { Big = 1UL << 32 };` or `uint64_t`."
+    },
+    {
+      "name": "bitint1",
+      "path": "exercises/11_bitint/bitint1.c",
+      "hint": "Bit-precise integers are `_BitInt(N)` and `unsigned _BitInt(N)`. Declare `unsigned _BitInt(8) byte;` so the value 255 fits exactly in 8 bits."
+    },
+    {
+      "name": "bitint2",
+      "path": "exercises/11_bitint/bitint2.c",
+      "hint": "Bit-precise suffixes are `wb` / `WB` for `_BitInt` and `uwb` / `UWB` for unsigned. `0b1111uwb` has type `unsigned _BitInt(4)`. Use a `uwb` literal."
+    },
+    {
+      "name": "bitint3",
+      "path": "exercises/11_bitint/bitint3.c",
+      "hint": "`unsigned _BitInt(3)` is exactly 3 value bits, so it wraps modulo 8. `7uwb + 1uwb` is `0`. Declare the addends as `unsigned _BitInt(3)` (or `uwb` literals) so the wrap is visible."
+    },
+    {
+      "name": "align1",
+      "path": "exercises/12_align/align1.c",
+      "hint": "`alignas` and `alignof` are keywords in C23 (the old `_Alignas` / `_Alignof` spellings still work). Write `alignas(32) unsigned char buf[64];` and compare with `alignof(buf)`."
+    },
+    {
+      "name": "labels1",
+      "path": "exercises/13_labels/labels1.c",
+      "hint": "C23 allows a label before a declaration or a closing brace. You no longer need a null statement (`done:;`). Put `int n = 1;` immediately after `done:`."
+    },
+    {
+      "name": "pp1",
+      "path": "exercises/14_preprocessor/pp1.c",
+      "hint": "`#elifdef NAME` is `#elif defined(NAME)`, and `#elifndef NAME` is `#elif !defined(NAME)`. Use `#elifdef HAVE_C23` in the `#if` chain."
+    },
+    {
+      "name": "pp2",
+      "path": "exercises/14_preprocessor/pp2.c",
+      "hint": "`#embed \"mascot.txt\"` expands to a comma-separated list of byte values. Put it inside the array initializer: `unsigned char mascot[] = { #embed \"mascot.txt\" };`."
+    },
+    {
+      "name": "pp3",
+      "path": "exercises/14_preprocessor/pp3.c",
+      "hint": "`__has_include(<header.h>)` is 1 when the header can be included. Use it to take the branch that includes `<stdbit.h>`."
+    },
+    {
+      "name": "pp4",
+      "path": "exercises/14_preprocessor/pp4.c",
+      "hint": "`__VA_OPT__(x)` expands to `x` only when `__VA_ARGS__` is non-empty. For a log macro: `#define LOG(fmt, ...) printf(fmt __VA_OPT__(,) __VA_ARGS__)` so `LOG(\"hi\\n\")` does not get a trailing comma."
+    },
+    {
+      "name": "stdbit1",
+      "path": "exercises/15_stdbit/stdbit1.c",
+      "hint": "Include `<stdbit.h>`. For an `unsigned char` value `0x10` (`0b00010000`): `stdc_count_ones` is 1, `stdc_leading_zeros` is 3, `stdc_trailing_zeros` is 4. The width is the width of the type, not of `unsigned int`."
+    },
+    {
+      "name": "stdbit2",
+      "path": "exercises/15_stdbit/stdbit2.c",
+      "hint": "`stdc_has_single_bit(x)` is true for powers of two. `stdc_bit_floor` rounds down to a power of two, `stdc_bit_ceil` rounds up, `stdc_bit_width` is `floor(log2(x))+1` (and 0 for 0)."
+    },
+    {
+      "name": "ckdint1",
+      "path": "exercises/16_ckdint/ckdint1.c",
+      "hint": "Include `<stdckdint.h>`. `ckd_add(&result, a, b)` stores `a+b` in `*result` and returns `true` if the result does not fit in `result`'s type. Check the overflow of `INT_MAX + 1`."
+    },
+    {
+      "name": "ckdint2",
+      "path": "exercises/16_ckdint/ckdint2.c",
+      "hint": "`ckd_mul` / `ckd_sub` work like `ckd_add`: `bool overflow = ckd_mul(&out, a, b);`. Use `ckd_mul` to detect that `100000 * 100000` does not fit in an `int`."
+    },
+    {
+      "name": "lib1",
+      "path": "exercises/17_library/lib1.c",
+      "hint": "`strdup` and `strndup` are standard in C23 (`<string.h>`). `char *copy = strdup(src);` allocates and copies. Free the copy when you are done."
+    },
+    {
+      "name": "lib2",
+      "path": "exercises/17_library/lib2.c",
+      "hint": "`unreachable()` in `<stddef.h>` tells the compiler a path cannot happen. Put it in the `default` of a switch you have already covered exhaustively. The C23 spelling is `unreachable();` — not `unreach()`."
+    },
+    {
+      "name": "compound1",
+      "path": "exercises/18_compound/compound1.c",
+      "hint": "C23 lets a compound literal take a storage-class specifier. `(int[]){1,2,3}` has automatic storage and dies when the function returns. `(static int[]){1,2,3}` lives for the whole program, so returning its address is safe."
+    },
+    {
+      "name": "quiz1",
+      "path": "exercises/19_quiz/quiz1.c",
+      "hint": "This one mixes several C23 features. Fill in: `auto`, `nullptr`, `bool`/`true`, a binary literal, `constexpr`, and `typeof`. The `static_assert`s and `assert`s tell you exactly which types and values are expected."
+    }
+  ]
+}
